@@ -5,10 +5,10 @@ pipeline{
     string(name: 'chef_repo_path', defaultValue: 'C:/Users/korukond/Documents/chef-repo', description: 'Enter the chef-repo path')
   }
   environment{
-    git_repo_path = 'https://github.com/rakeshkorukonda2412/windows_patch_management_pipeline.git'
+    git_repo_path = 'https://github.com/rakeshkorukonda2412/cookbook-validation.git'
     knife_path = 'C:/opscode/chef-workstation/bin'
     kitchen_path = 'C:/opscode/chef-workstation/bin'
-    //cookbook_path = "${chef_repo_path}/cookbooks/${cookbook_name}"
+    cookbook_path = "${chef_repo_path}/cookbooks/${cookbook_name}"
   }
   stages{
     stage('Checkout'){
@@ -21,10 +21,17 @@ pipeline{
     stage('cookstyle'){
       steps{
         script{
-          echo "${cookbook_name}"
-          echo "${chef_repo_path}"
-          dir("C:/Users/korukond/Documents/chef-repo/cookbooks/ems_mysql") {
+          dir("${cookbook_path}") {
             bat "cookstyle ."
+          }
+        }
+      }
+    }
+    stage('Unit Tests'){
+      steps{
+        script{
+          dir("${cookbook_path}") {
+            bat "chef exec rspec"
           }
         }
       }
