@@ -16,6 +16,15 @@ pipeline{
           credentialsId: 'github-user-cred',
           url: "${git_repo_path}"
       }
+  }
+  stage('cookstyle'){
+    steps{
+      script{
+        dir("${chef-repo-path}/${cookbook-name}") {
+          bat "cookstyle ."
+        }
+      }
     }
   }
-}
+ }
+} 
