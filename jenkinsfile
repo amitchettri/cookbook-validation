@@ -1,0 +1,21 @@
+pipeline{
+  agent { label 'master' }
+  parameters {
+    string(name: 'cookbook-name', defaultValue: '', description: 'Enter the cookbook name for validation')
+    string(name: 'chef-repo-path', defaultValue: 'C:\Users\korukond\Documents\chef-repo', description: 'Enter the chef-repo path')
+  }
+  environment{
+    git_repo_path = 'https://github.com/rakeshkorukonda2412/windows_patch_management_pipeline.git'
+    knife_path = 'C:\opscode\chef-workstation\bin'
+    kitchen_path = 'C:\opscode\chef-workstation\bin'
+  }
+  stages{
+    stage('Checkout'){
+      steps{
+        git branch: 'main',
+          credentialsId: 'github-user-cred',
+          url: "${git_repo_path}"
+      }
+    }
+  }
+}
