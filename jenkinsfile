@@ -36,5 +36,14 @@ pipeline{
         }
       }
     }
+    stage('Test Kitchen'){
+      steps{
+        script{
+          dir("${cookbook_path}") {
+            bat "kitchen test"
+          }
+        }
+      }
+    }
   }
 }
