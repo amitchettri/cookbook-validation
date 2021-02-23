@@ -8,7 +8,7 @@ pipeline{
     git_repo_path = 'https://github.com/rakeshkorukonda2412/windows_patch_management_pipeline.git'
     knife_path = 'C:/opscode/chef-workstation/bin'
     kitchen_path = 'C:/opscode/chef-workstation/bin'
-    cookbook_path = "${chef-repo-path}/cookbooks/${cookbook-name}"
+    //cookbook_path = "${chef-repo-path}/cookbooks/${cookbook-name}"
   }
   stages{
     stage('Checkout'){
@@ -21,7 +21,8 @@ pipeline{
     stage('cookstyle'){
       steps{
         script{
-          echo "${cookbook_path}"
+          echo "${cookbook-name}"
+          echo "${chef-repo-path}"
           dir("C:/Users/korukond/Documents/chef-repo/cookbooks/ems_mysql") {
             bat "cookstyle ."
           }
