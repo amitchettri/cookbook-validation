@@ -20,7 +20,7 @@ pipeline{
     stage('cookstyle'){
       steps{
         script{
-          dir("C:/Users/korukond/Documents/chef-repo/ems_mysql") {
+          dir("C:/Users/korukond/Documents/chef-repo/cookbooks/ems_mysql") {
             bat "cookstyle ."
           }
         }
